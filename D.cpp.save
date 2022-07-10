@@ -1,0 +1,148 @@
+/*
+Please Chant The Holy Name Of Lord Krishna(The Supreme Personality Of Godhead)
+
+      "Hare Krishna Hare Krishna Krishna Krishna Hare Hare
+       Hare Rama Hare Rama Rama Rama Hare Hare ......."
+
+Surrender yourself unto the Lotus Feet of Krishna, serve devotees and Srila Prabhupada
+*/
+//23-01-22
+#include <bits/stdc++.h>
+
+#define endl "\n"
+#define F first
+#define S second
+#define MP make_pair
+#define int long long
+
+#define pb emplace_back
+#define err 1e-8
+#define sz(s) (int)s.size()
+#define all(v)                            v.begin(),v.end()
+#define fr(i,a,b)                         for(int i=a;i<b;i++)
+#define d(a)                              cout << #a << " : " << a << " ";
+#define dl(a)                             cout<< #a <<" : " << a << endl;
+#define print(v)  for(auto x : v)         {cout<<x<<" ";   }  cout<<endl;
+#define PRINT(v)  for(auto x : v)         {cout<<x.first<<" "<<x.second<<endl;}
+#define TEST                              int tc;cin>>tc; while(tc--)
+#define printArr(a,b,arr)                 for(int i=a;i<b;++i) { cout<<arr[i]<< " ";} cout<<endl;
+#define yes                               cout<< "Yes"<<endl;
+#define no                                cout<< "No"<<endl;
+using namespace std;
+
+void kkp()
+{
+//#ifndef ONLINE_JUDGE
+    freopen("in.txt", "r", stdin);
+    freopen("out.txt", "w", stdout);
+//#endif
+}
+
+void time()
+{
+#ifndef ONLINE_JUDGE
+    cout<<"\nTime Elapsed: " << 1.0*clock() / CLOCKS_PER_SEC << " sec\n";
+#endif
+}
+
+const int N   = 1e6 + 5;
+const int MOD = 1e9 + 7;
+int ar[N],br[N];
+
+
+
+void solve()
+{
+    // Can you solve it by brute force?
+    // kkp
+    // Are you sure you want to code so soon?? -_-
+    // Simplify your code a little more. :)
+
+    int n;
+    cin>>n;
+
+    map<pair<int,int>,vector<int>>A;
+    map<tuple<int,int,int>,vector<int>>mp;
+
+    fr(i,1,n+1)
+    {
+        vector<int>v(3);
+        cin>>v[0]>>v[1]>>v[2];
+        sort(all(v));
+
+        A[ {v[1],v[2]}].pb(v[0]);
+        mp[ {v[0],v[1],v[2]}].pb(i);
+    }
+
+//    cout<< "PallabiKishor"<<endl;
+//
+//    for(auto x : A)
+//    {
+//        cout<<x.F.F<< " "<<x.F.S<< " : ";
+//        for(auto y : x.S)
+//            cout<<y<< " ";
+//        cout<<endl;
+//    }
+
+    int maxi = 0;
+    vector<int>ans;
+
+    for(auto x : A)
+    {
+        int a,b,c;
+        a = x.F.F;
+        b = x.F.S;
+
+        vi v = x.S;
+        int siz = sz(v);
+        sort(all(v));
+
+        if(siz>1)
+            c = v[siz-1] + v[siz-2];
+        else
+            c = v[0];
+
+        int mini = min({a,b,c});
+
+        if(maxi<mini)
+        {
+            ans.clear();
+            if(siz>1)
+            {
+                if(v[siz-1]!=v[siz-2])
+                {
+                    vi k = mp[ {v[siz-1],a,b}];
+                    vi k1 = mp[ {v[siz-2],a,b}];
+
+                    ans.pb(k[0]);
+                    ans.pb(k1[0]);
+                }
+                else
+                {
+                    vi k = mp[ {v[siz-1],a,b}];
+                    ans.pb(k[0]);
+                    ans.pb(k[1]);
+                }
+                maxi = max(maxi,mini);
+            }
+            else
+                ans.pb(mp[ {v[0],a,b}]);
+        }
+    }
+
+    cout<<sz(ans)<<endl;
+    print(ans)
+}
+
+int32_t main()
+{
+    //kkp();
+    ios_base::sync_with_stdio(!cin.tie(0));
+
+    //TEST
+    solve();
+
+    return 0;
+}
+
+

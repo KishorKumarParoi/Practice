@@ -1,0 +1,124 @@
+/*
+One Day You will become RED Coder Kishore;
+Just Keep breathing & Practicing in your own way;
+
+Please Chant The Holy Name Of Lord Krishna(The Supreme Personality Of Godhead)
+
+      "Hare Krishna Hare Krishna Krishna Krishna Hare Hare
+       Hare Rama Hare Rama Rama Rama Hare Hare ......."
+
+Surrender yourself unto the Lotus Feet of Krishna, serve devotees and Srila Prabhupada
+*/
+//29-01-22
+#include <bits/stdc++.h>
+
+#define endl "\n"
+#define F first
+#define S second
+#define MP make_pair
+#define int long long
+#define vi vector<int>
+#define pi pair<int,int>
+#define pb emplace_back
+#define err 1e-8
+#define sz(s) (int)s.size()
+#define all(v)                            v.begin(),v.end()
+#define fr(i,a,b)                         for(int i=a;i<b;i++)
+#define d(a)                              cout << #a << " : " << a << " ";
+#define dl(a)                             cout<< #a <<" : " << a << endl;
+#define print(v)  for(auto x : v)         {cout<<x<<" ";   }  cout<<endl;
+#define PRINT(v)  for(auto x : v)         {cout<<x.first<<" "<<x.second<<endl;}
+#define TEST                              int tc;cin>>tc; while(tc--)
+#define printArr(a,b,arr)                 for(int i=a;i<b;++i) { cout<<arr[i]<< " ";} cout<<endl;
+#define yes                               cout<< "Yes"<<endl;
+#define no                                cout<< "No"<<endl;
+using namespace std;
+
+void kkp()
+{
+//#ifndef ONLINE_JUDGE
+    freopen("in.txt", "r", stdin);
+    freopen("out.txt", "w", stdout);
+//#endif
+}
+
+void time()
+{
+#ifndef ONLINE_JUDGE
+    cout<<"\nTime Elapsed: " << 1.0*clock() / CLOCKS_PER_SEC << " sec\n";
+#endif
+}
+
+const int N   = 1e6 + 5;
+const int MOD = 1e9 + 7;
+int ar[N],br[N];
+
+
+queue<int>e[300005];
+queue<pair<int,int>>Q;
+ map<int,bool>mark;
+void solve()
+{
+    // Can you solve it by brute force?
+    // kkp
+    // Are you sure you want to code so soon?? -_-
+    // Simplify your code a little more. :)
+
+ 
+    cin>>n>>q;
+
+    int unread = 0,idx = 1;
+   
+
+    fr(i,0,q)
+    {
+        int type,x;
+        cin>>type>>x;
+
+        if(type<2)
+        {
+            Q.push({idx,x});
+            e[x].push(idx);
+            unread++;
+        }
+        else if(type==2)
+        {
+            while(!e[x].empty())
+            {
+                mark[e[x].front()] = 1;
+                e[x].pop();
+                unread--;
+            }
+        }
+        else if(type>2)
+        {
+            while(!Q.empty() && Q.front().first<=x)
+            {
+                int u = Q.front().first;
+                int v = Q.front().second;
+                Q.pop();
+
+                if(!mark[idx])
+                    mark[idx] = 1;
+                e[v].pop();
+                unread--;
+            }
+        }
+
+        idx++;
+        cout<<unread<<endl;
+    }
+}
+
+int32_t main()
+{
+    //kkp();
+    ios_base::sync_with_stdio(!cin.tie(0));
+
+    //TEST
+    solve();
+
+    return 0;
+}
+
+
